@@ -28,6 +28,16 @@ $auth = new Auth(new UserStorage());
     <?php } 
     else{?>
         <p>Hello, <?= $auth -> authenticated_user()['username'] ?>!</p>
+
+        <br>
+        <a href="employees.php">Dolgozók</a>
+        <br>
+
+        <br>
+        <a href="addemployee.php">Új dolgozó felvétele</a>
+        <br>
+        <br>
+
         <a href="logout.php">Logout</a>
     <?php } ?>
     
