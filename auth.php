@@ -23,6 +23,19 @@ class Auth {
       ];
       return $this->user_storage->add($user);
     }
+
+    public function register2($data) {
+      $user = [
+        'username'  => $data['username'],
+        'password'  => password_hash($data['password'], PASSWORD_DEFAULT),
+        'personid'  => $data['personid'],
+        'email'  => $data['email'],
+        "roles"     => ["user"],
+      ];
+      return $this->user_storage->add($user);
+    }
+
+    
   
     public function user_exists($username) {
       $users = $this->user_storage->findOne(['username' => $username]);

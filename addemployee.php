@@ -4,11 +4,25 @@ include_once('userstorage.php');
 include_once('employeestorage.php');
 include_once('auth.php');
 
-$employeeStorage = new EmployeeStorage();
+session_start();
+$auth = new Auth(new UserStorage());
 
+$isadmin=false;
+
+if ($auth->is_authenticated()){
+    if (in_array("admin", $auth->authenticated_user()['roles'])){
+        $isadmin=true;
+    }
+}
+
+$employeeStorage = new EmployeeStorage();
+$userStorage = new UserStorage();
+
+$employees = $employeeStorage->findAll([]);
 
 $data = [];
 $errors = [];
+$user = [];
 
 if (count($_POST) > 0) {
     
@@ -34,18 +48,40 @@ if (count($_POST) > 0) {
         $data['dailywork'] = $_POST['dailywork'];
         $data['legreltype'] = $_POST['legreltype'];
         $data['comment'] = $_POST['comment'];
-        $data['role'] = $_POST['role'];
+        // $data['role'] = $_POST['role'];
         
+        $personid=rand(1000000,9999999);
+        $again=false;
+        do{
+            $again=false;
+            foreach ($employees as $employee) {
+                if($employee['personid']==$personid){
+                    $again=true;
+                }
+            }
+        }while($again);
+        
+        
+        
+        $data['personid']=(string)$personid;
 
 
-
-
-
-        /* date_default_timezone_set("Europe/Budapest");
-        $data['hired_since']=date('Y-m-d', time()+ 2168); */
         $employeeStorage->add($data);
-        header('Location: index.php?');
-        exit();
+        
+        
+        $user['password']="elsojelszo";
+        $user['roles']=["user"];
+        $user['username']=$_POST['username'];
+        $user['email']="";
+        $user['personid']=(string)$personid;
+
+        $auth->register2($user);
+        // $userStorage->add($user);
+       
+        $myfile = fopen("employee_vac_json/".$data['personid'].".json", "w");
+        
+        /* header('Location: index.php?');
+        exit(); */
     
   }
 
@@ -60,7 +96,8 @@ if (count($_POST) > 0) {
 </head>
 <body>
 
-<p>Dolgozó felvétele</p>
+
+<h1>Dolgozó felvétele</h1>
 
   
         <form action="" method="post" novalidate>
@@ -71,13 +108,13 @@ if (count($_POST) > 0) {
         <?php endif ?>
 
         <p>Családnév:</p>
-        <input type="text" name="familyname">
+        <input id="famname" type="text" name="familyname">
         <?php if(isset($errors['familyname'])): ?>
             <span style="color: red"> <?= $errors['familyname'] ?> </span>
         <?php endif ?>
 
         <p>Utónév1:</p>
-        <input type="text" name="forename1">
+        <input id="forename" type="text" name="forename1">
         <?php if(isset($errors['forename1'])): ?>
             <span style="color: red"> <?= $errors['forename1'] ?> </span>
         <?php endif ?>
@@ -197,6 +234,49 @@ if (count($_POST) > 0) {
         <?php if(isset($errors['comment'])): ?>
             <span style="color: red"> <?= $errors['comment'] ?> </span>
         <?php endif ?>
+
+
+        <br>
+        <br>
+
+        <p>A dolgozó felhasználóneve:</p>
+        <input id="username" type="text" name="username" value="">
+        <?php if(isset($errors['username'])): ?>
+            <span style="color: red"> <?= $errors['username'] ?> </span>
+        <?php endif ?>
+
+        <script>
+        var usernameInput = document.getElementById('username');
+        var famnameInput = document.getElementById('famname');
+        var fornameInput = document.getElementById('forename');
+        
+        /* var users = "";
+        fetch('users.json').then(response => response.text()).then(text => users=JSON.parse(text)) */
+       
+        
+
+        famnameInput.addEventListener('input', (event) => {      
+          var famname = famnameInput.value;   
+          var forname = fornameInput.value;
+          var uname=(famname.concat(".")).concat(forname);
+          //console.log(username);
+          usernameInput.setAttribute("value",uname);
+          //console.log(users.find(object => object.username === uname));
+        });
+
+        fornameInput.addEventListener('input', (event) => {      
+          var famname = famnameInput.value;   
+          var forname = fornameInput.value;
+          var username=(famname.concat(".")).concat(forname);
+          //console.log(username);
+          usernameInput.setAttribute("value",username);
+          //console.log(users.find(object => object.username === uname));
+        });
+
+        
+        
+        
+      </script>
         
 
         <br><br>

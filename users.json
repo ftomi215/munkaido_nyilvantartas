@@ -1,13 +1,14 @@
 {
     "adminid1": {
-        "id": "adminid1",
+        "username": "admin",
         "password": "$2y$10$2vOjGXfspeH5x0BI\/dKQM.pRr.W9iNtry02va2vScL53p21V3CizC",
+        "email": "admin@admin.hu",
+        "personid": null,
         "roles": [
             "user",
             "admin"
         ],
-        "username": "admin",
-        "email": "admin@elstadion.hu"
+        "id": "adminid1"
     },
     "userid1": {
         "id": "userid1",
@@ -89,5 +90,94 @@
             "user"
         ],
         "id": "61c9ac3056f71"
+    },
+    "62cddfc628640": {
+        "username": "teszt.teszt",
+        "password": "$2y$10$rEG1S20wVQttBnwu6whc4.jc\/b1GfcvLfbes4Pl1zSr8Y7reZNlhq",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62cddfc628640"
+    },
+    "62cde6647e879": {
+        "username": "yyy",
+        "password": "$2y$10$ZRCk8C7UPHby4zGYAR2zaucz0Ih\/syeHmuCY9Tr6Wv\/O6pXWqFxdG",
+        "email": "asd@asd.hu",
+        "personid": 3884635,
+        "roles": [
+            "user"
+        ],
+        "id": "62cde6647e879"
+    },
+    "62cdfdf659bcd": {
+        "username": "teszt.1",
+        "password": "$2y$10$t2DAOs22alnxEUxtfgMh\/uZvasn5OCb1TOabwIojeG9zZ5TbFf1M2",
+        "personid": 8901435,
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62cdfdf659bcd"
+    },
+    "62cdfea435c5e": {
+        "username": "teszt.1",
+        "password": "$2y$10$dATHu0C.MRl\/hsQjcm\/RP.NcGBMBs6BVbnWzgSmN..0miDruS9kfa",
+        "personid": "8632590",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62cdfea435c5e"
+    },
+    "62ce039d1d783": {
+        "username": "kicsi.buba",
+        "password": "$2y$10$YV9Eei35ZWZFkicnzatT7O.9w1ZarebsCek3kpWh3UpIfo\/t9OeBW",
+        "personid": "3139306",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62ce039d1d783"
+    },
+    "62ce0f49149b0": {
+        "username": "kicsi.buba",
+        "password": "$2y$10$s9KsSo.3\/rEKMF5RBX3AnuS7K5gupkRX7HLNHYhSy9AD0i5pZokLG",
+        "personid": "4274823",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62ce0f49149b0"
+    },
+    "62ce9a378a019": {
+        "username": "kicsi.buba",
+        "password": "$2y$10$nKxcAm7vDdD\/yLBy0b6nCOwiK25Ad6MW47lkSZ4SJtqoWNBEY5uKW",
+        "personid": "5121382",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62ce9a378a019"
+    },
+    "62d08538ac393": {
+        "username": "teszt.po",
+        "password": "$2y$10$jr1r\/yrfnyGVUy9P37vXVuK6QXVo0Uys\/DKh.EWmOKdGKstWxackW",
+        "personid": "3057609",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62d08538ac393"
+    },
+    "62d0858c67ffc": {
+        "username": "teszte.po",
+        "password": "$2y$10$Unbx9Wzq\/qULpG6J1Cs0n.E3xf6pDB5Nk4RigLaqIxJJiRoXEjhWu",
+        "personid": "5920690",
+        "email": "",
+        "roles": [
+            "user"
+        ],
+        "id": "62d0858c67ffc"
     }
 }

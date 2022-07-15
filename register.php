@@ -7,46 +7,46 @@ include('userstorage.php');
 // functions
 function validate($post, &$data, &$errors) {
     if (!isset($post['username'])) {
-        $errors['username'] = 'Username is not set';
+        $errors['username'] = 'Nem adott meg felhasználónevet!';
       }
       else if (trim($post['username']) === '') {
-        $errors['username'] = 'Username is required';
+        $errors['username'] = 'Nem adott meg felhasználónevet!';
       }
       else {
         $data['username'] = $post['username'];
       }
     
       if (!isset($post['email'])) {
-        $errors['email'] = 'Email is not set';
+        $errors['email'] = 'Nem adott meg e-mail címet!';
       }
       else if (trim($post['email']) === '') {
-        $errors['email'] = 'Email is required';
+        $errors['email'] = 'Nem adott meg e-mail címet!';
       }
       else if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Email is invalid';
+        $errors['email'] = 'Az e-mail cím helytelen!';
     }
     else{
         $data['email'] = $post['email'];
     }
 
     if (!isset($post['password'])) {
-        $errors['password'] = 'Password is not set';
+        $errors['password'] = 'Nem adott meg jelszavat!';
     }
     else if (trim($post['password']) === '') {
-        $errors['password'] = 'Password is required';
+        $errors['password'] = 'Nem adott meg jelszavat!';
     }
     else if (strcmp($post['password'], $post['password_again']) !== 0){
-        $errors['password'] = 'The passwords are not the same';
+        $errors['password'] = 'A jelszavak nem egyeznek meg!';
     }
     else{
         $data['password'] = $post['password'];
     }
 
     if (!isset($post['password_again'])) {
-        $errors['password_again'] = 'Password is not set';
+        $errors['password_again'] = 'Nem adott meg jelszavat!';
     }
     else if (trim($post['password']) === '') {
-        $errors['password_again'] = 'Password is required';
+        $errors['password_again'] = 'Nem adott meg jelszavat!';
     }
 
 
@@ -68,7 +68,7 @@ $data = [];
 if (count($_POST) > 0) {
   if (validate($_POST, $data, $errors)) {
     if ($auth->user_exists($data['username'])) {
-      $errors['global'] = "User already exists";
+      $errors['global'] = "Már létezik ilyen nevű felhasználó";
     } else {
       $auth->register($data);
       redirect('login.php');
@@ -85,16 +85,16 @@ if (count($_POST) > 0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Regisztráció</title>
 </head>
 <body>
-    <h1>Registration</h1>
+    <h1>Regisztráció</h1>
     <?php if (isset($errors['global'])) : ?>
   <p><span class="error"><?= $errors['global'] ?></span></p>
 <?php endif; ?>
 <form action="" method="post">
   <div>
-    <label for="username">Username: </label><br>
+    <label for="username">Felhasználónév: </label><br>
     <input type="text" name="username" id="username" value="<?= $_POST['username'] ?? "" ?>">
 
     <?php if (isset($errors['username'])) : ?>
@@ -102,28 +102,28 @@ if (count($_POST) > 0) {
     <?php endif; ?>
   </div>
   <div>
-    <label for="password">Password: </label><br>
+    <label for="password">Jelszó: </label><br>
     <input type="password" name="password" id="password" value="<?= $_POST['password'] ?? "" ?>">
     <?php if (isset($errors['password'])) : ?>
       <span class="error"><?= $errors['password'] ?></span>
     <?php endif; ?>
   </div>
   <div>
-    <label for="password_again">Password again: </label><br>
+    <label for="password_again">Jelszó újra: </label><br>
     <input type="password" name="password_again" id="password_again" value="<?= $_POST['password_again'] ?? "" ?>">
     <?php if (isset($errors['password_again'])) : ?>
       <span class="error"><?= $errors['password_again'] ?></span>
     <?php endif; ?>
   </div>
   <div>
-    <label for="email">E-mail: </label><br>
+    <label for="email">E-mail cím: </label><br>
     <input type="text" name="email" id="email" value="<?= $_POST['email'] ?? "" ?>">
     <?php if (isset($errors['email'])) : ?>
       <span class="error"><?= $errors['email'] ?></span>
     <?php endif; ?>
   </div>
   <div>
-    <button type="submit">Register</button>
+    <button type="submit">Regisztrálás</button>
   </div>
 </form>
 

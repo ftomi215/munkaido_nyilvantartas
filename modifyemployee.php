@@ -6,6 +6,14 @@ include_once('auth.php');
 session_start();
 $auth = new Auth(new UserStorage());
 
+$isadmin=false;
+
+if ($auth->is_authenticated()){
+    if (in_array("admin", $auth->authenticated_user()['roles'])){
+        $isadmin=true;
+    }
+}
+
 $employeeStorage = new EmployeeStorage();
 $userStorage = new UserStorage();
 
@@ -76,8 +84,9 @@ if (count($_POST) > 0) {
 </head>
 <body>
   <h1>Dolgozó adatainak módosítása</h1>
-  
-  <form action="" method="post" novalidate>
+
+  <?php if($isadmin){?>
+    <form action="" method="post" novalidate>
         <p>Titulus:</p>
         <input type="text" name="title" value="<?= $employee['title'] ?>">
         <?php if(isset($errors['title'])): ?>
@@ -219,5 +228,11 @@ if (count($_POST) > 0) {
 
         <button>Módosít</button>
   </form>
+    <?php
+  }
+  else{?>
+  <p>Csak admin felhasználó módosíthatja egy dolgozó adatait.</p><?php
+  }?>  
+  
 </body>
 </html>

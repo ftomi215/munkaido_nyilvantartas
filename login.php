@@ -7,20 +7,20 @@ include('userstorage.php');
 // functions
 function validate($post, &$data, &$errors) {
     if (!isset($post['username'])) {
-        $errors['username'] = 'Username is not set';
+        $errors['username'] = 'Nem adott meg felhasználónevet!';
       }
       else if (trim($post['username']) === '') {
-        $errors['username'] = 'Username is required';
+        $errors['username'] = 'Nem adott meg felhasználónevet!';
       }
       else {
         $data['username'] = $post['username'];
       }
 
       if (!isset($post['password'])) {
-        $errors['password'] = 'Password is not set';
+        $errors['password'] = 'Nem adott meg jelszavat!';
     }
     else if (trim($post['password']) === '') {
-        $errors['password'] = 'Password is required';
+        $errors['password'] = 'Nem adott meg jelszavat!';
     }
     else{
         $data['password'] = $post['password'];
@@ -46,7 +46,7 @@ if (count($_POST)>0) {
   if (validate($_POST, $data, $errors)) {
     $auth_user = $auth->authenticate($data['username'], $data['password']);
     if (!$auth_user) {
-      $errors['global'] = "Incorrect username or password!";
+      $errors['global'] = "Helytelen felhasználónév vagy jelszó!";
     } else {
       $auth->login($auth_user);
       redirect('index.php');
@@ -63,10 +63,10 @@ if (count($_POST)>0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bejelentkezés</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Bejelentkezés</h1>
     <?php if (isset($errors['username'])) : ?>
   <p><span class="error"><?= $errors['username'] ?></span></p>
 <?php endif; ?>
@@ -78,17 +78,18 @@ if (count($_POST)>0) {
 <?php endif; ?>
 <form action="" method="post">
   <div>
-    <label for="username">Username: </label><br>
+    <label for="username">Felhasználónév: </label><br>
     <input type="text" name="username" id="username">
     
   </div>
   <div>
-    <label for="password">Password: </label><br>
+    <label for="password">Jelszó: </label><br>
     <input type="password" name="password" id="password">
     
   </div>
+  <br>
   <div>
-    <button type="submit">Login</button>
+    <button type="submit">Belépés</button>
   </div>
 </form>
 
